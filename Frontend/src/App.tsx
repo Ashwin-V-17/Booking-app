@@ -12,6 +12,7 @@ const App=()=>{
          <Route path="/" element={<Layout></Layout>}/>
         <Route path="/search" element={<>Search Page</>}/>
         <Route path="*" element={<Navigate to="/"></Navigate>}/>
+        
       </Routes>
     </Router>
   )
