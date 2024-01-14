@@ -9,8 +9,12 @@ const App=()=>{
   return (
     <Router>
       <Routes>
-         <Route path="/" element={<Layout></Layout>}/>
-        <Route path="/search" element={<>Search Page</>}/>
+         <Route path="/" element={<Layout>
+          <p>HomePage</p>
+         </Layout>}/>
+        <Route path="/search" element={<Layout>
+          <p>SearchPage</p>
+         </Layout>}/>
         <Route path="*" element={<Navigate to="/"></Navigate>}/>
         
       </Routes>
