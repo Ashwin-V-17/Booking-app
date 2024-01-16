@@ -16,7 +16,7 @@ const App=()=>{
         <Route path="/search" element={<Layout>
           <p>SearchPage</p>
          </Layout>}/>
-         <Route path="/register" element={<Register/>}/>
+         <Route path="/register" element={<Layout><Register/></Layout>}/>
         <Route path="*" element={<Navigate to="/"></Navigate>}/>
         
       </Routes>
