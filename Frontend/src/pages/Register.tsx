@@ -8,7 +8,7 @@ type RegisterFormData={
     confrimPassword:string;
 }
 const Register=()=>{
-    const {register,watch,handleSubmit}=useForm<RegisterFormData>();
+    const {register,watch,handleSubmit,formState:{errors},}=useForm<RegisterFormData>();
     const onSubmit=handleSubmit((data)=>{
           console.log(data);
     });
@@ -19,16 +19,25 @@ const Register=()=>{
               <label className="text-gray-700 text-sm font-bold flex-1">
                 First Name
                 <input className="border rounded w-full py-1 px-2 font-normal"{...register("firstname",{required:"This Field is required"})}></input>
+                {errors.firstname &&(
+                  <span className="text-red-500">{errors.firstname.message}</span>
+                )}
               </label>
               <label className="text-gray-700 text-sm font-bold flex-1">
                 LastName
                 <input className="border rounded w-full py-1 px-2 font-normal"{...register("lastname",{required:"This Field is required"})}></input>
+                {errors.lastname &&(
+                  <span className="text-red-500">{errors.lastname.message}</span>
+                )}
               </label>
             </div>
             <label className="text-gray-700 text-sm font-bold flex-1">
                 Email
                 <input type="email" 
                 className="border rounded w-full py-1 px-2 font-normal"{...register("email",{required:"This Field is required"})}></input>
+                {errors.email &&(
+                  <span className="text-red-500">{errors.email.message}</span>
+                )}
               </label>
               <label className="text-gray-700 text-sm font-bold flex-1">
                 password
@@ -38,6 +47,9 @@ const Register=()=>{
                     value:6,
                     message:"Password must be atleast 6 characters",
                 },})}></input>
+                {errors.password &&(
+                  <span className="text-red-500">{errors.password.message}</span>
+                )}
               </label>
               <label className="text-gray-700 text-sm font-bold flex-1">
                 Confirm Password
@@ -54,6 +66,9 @@ const Register=()=>{
                         }
                     },
                 })}></input>
+                {errors.confrimPassword &&(
+                  <span className="text-red-500">{errors.confrimPassword.message}</span>
+                )}
               </label>
               <span>
                 <button type="submit" 
