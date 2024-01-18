@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
-//typescript way of defining type for the form fields
-type RegisterFormData={
+import { useMutation } from "react-query";
+import * as apiClient from '../api-clients';//Allows us to import all the function from api-clients and in the variable apiClient
+ export type RegisterFormData={//typescript way of defining type for the form fields
     firstname:string,
     lastname:string;
     email:string;
@@ -9,8 +10,18 @@ type RegisterFormData={
 }
 const Register=()=>{
     const {register,watch,handleSubmit,formState:{errors},}=useForm<RegisterFormData>();
+
+    const mutation=useMutation(apiClient.register,{
+      onSuccess:()=>{
+        console.log("registration successful!");
+      },
+      onError:(error:Error)=>{
+             console.log(error.message);
+      }
+    });
+
     const onSubmit=handleSubmit((data)=>{
-          console.log(data);
+          mutation.mutate(data);
     });
     return(
         <form className="flex flex-col gap-5" onSubmit={onSubmit}>

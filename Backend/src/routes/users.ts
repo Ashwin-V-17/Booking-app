@@ -7,7 +7,7 @@ router.post('/register',[
     check("firstname","firstname is required").isString(),
     check("lastname","lastname is required").isString(),
     check("email","email is required").isEmail(),
-    check("Password","password with 6 or more characters is required").isLength({
+    check("password","password with 6 or more characters is required").isLength({
         min:6
     }),
 ],async(req:Request,res:Response)=>{
@@ -33,7 +33,7 @@ router.post('/register',[
             secure:process.env.NODE_ENV === "production",
             maxAge:86400000,
            })
-           return res.sendStatus(200);
+           return res.status(200).send({message:"User registered OK"});
        }
        catch(error)
        {
