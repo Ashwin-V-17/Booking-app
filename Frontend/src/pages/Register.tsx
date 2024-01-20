@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import * as apiClient from '../api-clients';//Allows us to import all the function from api-clients and in the variable apiClient
+import { useAppContext } from "../contexts/AppContext";
+import { useNavigate } from "react-router-dom";
  export type RegisterFormData={//typescript way of defining type for the form fields
     firstname:string,
     lastname:string;
@@ -9,15 +11,18 @@ import * as apiClient from '../api-clients';//Allows us to import all the functi
     confrimPassword:string;
 }
 const Register=()=>{
+   const navigate=useNavigate();
+     const {showToast}=useAppContext();
     const {register,watch,handleSubmit,formState:{errors},}=useForm<RegisterFormData>();
 
     const mutation=useMutation(apiClient.register,{
       onSuccess:()=>{
-        console.log("registration successful!");
+        showToast({message:"Registration Successful!",type:"SUCCESS"})
+        navigate("/");
       },
       onError:(error:Error)=>{
-             console.log(error.message);
-      }
+        showToast({message:error.message,type:"ERROR"})
+            }
     });
 
     const onSubmit=handleSubmit((data)=>{
